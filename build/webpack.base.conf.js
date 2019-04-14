@@ -7,8 +7,17 @@ const vueLoaderConfig = require('./vue-loader.conf')
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
-
-
+// 1. 拼接路径需要的配置
+const createLintingRule = () => ({
+  test: /\.(js|vue)$/,
+  loader: 'eslint-loader',
+  enforce: 'pre',
+  include: [resolve('src'), resolve('test')],
+  options: {
+    formatter: require('eslint-friendly-formatter'),
+    emitWarning: !config.dev.showEslintErrorsInOverlay
+  }
+})
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
@@ -27,9 +36,12 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      // 2. 拼接路径: 之后再引用src/assets/styles里面的文件就直接可以利用~styles代替
+      'styles': resolve('src/assets/styles'),
     }
   },
   module: {
+    ...(config.dev.useEslint ? [createLintingRule()] : []),
     rules: [
       {
         test: /\.vue$/,
