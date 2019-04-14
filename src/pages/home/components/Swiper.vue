@@ -1,9 +1,9 @@
 <template>
     <div class="wrapper">
         <!-- 插槽的形式 -->
-        <swiper :options="swiperOption">
+        <swiper :options="swiperOption" v-if="showSwiper">
             <!-- slides -->
-            <swiper-slide v-for="item of swiperList" :key="item.id">
+            <swiper-slide v-for="item of list" :key="item.id">
                 <img class="swiper-img" :src="item.url">
             </swiper-slide>
             <div class="swiper-pagination"  slot="pagination"></div>
@@ -13,6 +13,9 @@
 <script>
 export default {
     name:'HomeSwiper',
+    props:{
+        list:Array
+    },
     data (){
         return{
             swiperOption:{
@@ -24,11 +27,16 @@ export default {
                 loop:true
             },
             // 将轮播图放进数组中，遍历数组实现轮播图
-            swiperList:[
-                {id:'0001', url:'//img1.qunarzz.com/vc/80/80/1a/72b8f423c33e581ca72fc136da.jpg'},
-                {id:'0002', url:'//img1.qunarzz.com/vc/bf/9d/a3/67b7b37511fa26a78298bf1da1.jpg'},
-                {id:'0003', url:'//img1.qunarzz.com/vc/5a/8f/69/16cbf52c43d04f6940a6786679.jpg'}
-            ]
+            // swiperList:[
+            //     {id:'0001', url:'//img1.qunarzz.com/vc/80/80/1a/72b8f423c33e581ca72fc136da.jpg'},
+            //     {id:'0002', url:'//img1.qunarzz.com/vc/bf/9d/a3/67b7b37511fa26a78298bf1da1.jpg'},
+            //     {id:'0003', url:'//img1.qunarzz.com/vc/5a/8f/69/16cbf52c43d04f6940a6786679.jpg'}
+            // ]
+        }
+    },
+    computed:{
+        showSwiper(){
+            return this.list.length
         }
     }
 }

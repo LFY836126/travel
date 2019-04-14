@@ -8,18 +8,23 @@
             输入城市/景点/游玩主题
         </div>
         <div class="header-right">
-            城市
+            {{city}}
             <span class="iconfont arrow-icon">&#xe64a;</span>
         </div>
     </div>
 </template>
 <script>
-
+export default{
+    // 接受父组件传递过来的值
+    props:{
+        city:String
+    }
+}
 </script>
 <style lang="stylus" scoped>
     // 将resets.css中将html：font-size设置为50px是有意义的，因为移动端是实际电脑显示的2倍，所以这里的height就直接可以用.86rem(其实不是太懂)
     @import '../../../assets/styles/varibles.styl'
-    .header
+     .header
         line-height:.86rem
         display :flex
         background: $bgColor

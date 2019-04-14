@@ -17,21 +17,24 @@
 </template>
 <script>
 export default {
-
+    props:{
+        list:Array,
+    },
     data(){
         return {
-            iconList:[
-                {id:'0001', imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png', desc:'景点门票'},
-                {id:'0002', imgUrl:'http://img1.qunarzz.com/piao/fusion/1804/ff/fdf170ee89594b02.png', desc:'哈尔滨必游'},
-                {id:'0003', imgUrl:'http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png', desc:'一日游'},
-                {id:'0004', imgUrl:'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20193/a40ee278d67000f2a29d2e20f6a029b3.png', desc:'自然风光'},
-                {id:'0005', imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/ab/6f7d6e44963c9302.png', desc:'泡温泉'},
-                {id:'0006', imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/f5/a963333e1fa802.png', desc:'当地好玩'},
-                {id:'0007', imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/76/eb88861d78fb9902.png', desc:'动植物园'},
-                {id:'0008', imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/50/26ffa31b56646402.png', desc:'亲子游'},
-                {id:'0009', imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/95/8246f27355943202.png', desc:'游乐园'},
-            ],
+            // iconList:[
+            //     {id:'0001', imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png', desc:'景点门票'},
+            //     {id:'0002', imgUrl:'http://img1.qunarzz.com/piao/fusion/1804/ff/fdf170ee89594b02.png', desc:'哈尔滨必游'},
+            //     {id:'0003', imgUrl:'http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png', desc:'一日游'},
+            //     {id:'0004', imgUrl:'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20193/a40ee278d67000f2a29d2e20f6a029b3.png', desc:'自然风光'},
+            //     {id:'0005', imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/ab/6f7d6e44963c9302.png', desc:'泡温泉'},
+            //     {id:'0006', imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/f5/a963333e1fa802.png', desc:'当地好玩'},
+            //     {id:'0007', imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/76/eb88861d78fb9902.png', desc:'动植物园'},
+            //     {id:'0008', imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/50/26ffa31b56646402.png', desc:'亲子游'},
+            //     {id:'0009', imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/95/8246f27355943202.png', desc:'游乐园'},
+            // ],
             swiperOption:{
+                autoplay:false,
                 // 实现轮播图下面的圈圈
                 pagination:{
                     el : '.swiper-pagination'
@@ -43,7 +46,7 @@ export default {
         // 将轮播图分页，1-8处于第一页，2-16属于第二页等等
         pages (){
             const pages = [];
-            this.iconList.forEach((item, index) =>{
+            this.list.forEach((item, index) =>{
                 const page = Math.floor(index/8);
                 if(!pages[page]){
                     pages[page] = [];

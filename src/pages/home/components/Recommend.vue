@@ -2,7 +2,7 @@
     <div>
           <div class="recommend-title">热门推荐</div>
           <ul>
-              <li class="item border-bottom" v-for="item in recommendList" :key="item.id">
+              <li class="item border-bottom" v-for="item in list" :key="item.id">
                   <img  class="item-img" :src="item.imgUrl">
                   <div class="item-info">
                       <p class="item-title">{{item.title}}</p>
@@ -15,13 +15,16 @@
 </template>
 <script>
 export default {
+    props:{
+        list:Array,
+    },
     data (){
         return {
-            recommendList:[
-                {id:'0001', imgUrl:'http://img1.qunarzz.com/sight/p0/1805/17/179163260bf3597aa3.img.jpg_200x200_95a1caac.jpg',title:'太阳岛', desc:'位于城市中心的江漫滩湿地草原fdaskhkjahndakkjfsdajhkakfsnfsa型风景名胜区'},
-                {id:'0002', imgUrl:'http://img1.qunarzz.com/sight/p0/1805/17/179163260bf3597aa3.img.jpg_200x200_95a1caac.jpg',title:'太阳岛', desc:'位于城市中心的江漫滩湿地草原fdaskhkjahndakkjfsdajhkakfsnfsa型风景名胜区'},
-                {id:'0003', imgUrl:'http://img1.qunarzz.com/sight/p0/1805/17/179163260bf3597aa3.img.jpg_200x200_95a1caac.jpg',title:'太阳岛', desc:'位于城市中心的江漫滩湿地草原fdaskhkjahndakkjfsdajhkakfsnfsa型风景名胜区'}
-            ]
+            // recommendList:[
+            //     {id:'0001', imgUrl:'http://img1.qunarzz.com/sight/p0/1805/17/179163260bf3597aa3.img.jpg_200x200_95a1caac.jpg',title:'太阳岛', desc:'位于城市中心的江漫滩湿地草原fdaskhkjahndakkjfsdajhkakfsnfsa型风景名胜区'},
+            //     {id:'0002', imgUrl:'http://img1.qunarzz.com/sight/p0/1805/17/179163260bf3597aa3.img.jpg_200x200_95a1caac.jpg',title:'太阳岛', desc:'位于城市中心的江漫滩湿地草原fdaskhkjahndakkjfsdajhkakfsnfsa型风景名胜区'},
+            //     {id:'0003', imgUrl:'http://img1.qunarzz.com/sight/p0/1805/17/179163260bf3597aa3.img.jpg_200x200_95a1caac.jpg',title:'太阳岛', desc:'位于城市中心的江漫滩湿地草原fdaskhkjahndakkjfsdajhkakfsnfsa型风景名胜区'}
+            // ]
         }
     }
 }
