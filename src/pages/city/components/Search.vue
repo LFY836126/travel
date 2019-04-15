@@ -5,7 +5,7 @@
             <!-- 输入字母后，也就是keyword有值时，将输入应该显示的背景输入出来 -->
             <div class="search-content" ref="search" v-show="keyword">
                 <ul>
-                    <li class="search-item border-bottom" v-for="item of list" :key="item.id">{{item.name}}</li>
+                    <li class="search-item border-bottom" v-for="item of list" :key="item.id" @click="handleCityClick(item.name)">{{item.name}}</li>
                    <!-- 当keyword不存在的时候提示没有数据 -->
                     <li class="search-item border-bottom" v-show="flag">没有匹配到城市</li>
                 </ul>
@@ -14,6 +14,7 @@
     </div>
 </template>
 <script>
+import { mapState, mapMutations } from 'vuex'
 import Bscroll from 'better-scroll'
 export default {
     props:{
@@ -26,6 +27,19 @@ export default {
             timer:null,
             flag:0,
         }
+    },
+    methods:{
+        handleCityClick(city){
+            // 我需要调用dispatch将数据传给actions，然后actions通过commit调用mutations，完成state中数据的改变
+            // this.$store.dispatch('changeCity' , city);
+            // this.$store.commit('changeCity' , city);
+
+            // 因为 -> ...mapMutations(['changeCity']),所以这里直接用changeCity就可以
+            this.changeCity(city);
+            // 跳转到路由为 / 的页面
+            this.$router.push('/');
+        },
+        ...mapMutations(['changeCity'])
     },
     watch: {
         keyword(){

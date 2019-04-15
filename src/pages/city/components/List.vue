@@ -7,7 +7,8 @@
                 <div class="button-list">
                     <div class="button-wrapper">
                         <div class="button">
-                            北京
+                            <!-- 因为使用了mapState -->
+                            {{this.currentCity}}
                         </div>
                     </div>
                 </div>
@@ -16,7 +17,7 @@
                 <div class="title border-topbottom">热门城市</div>
                 <div class="button-list">
                     <!-- 注意这里是循环button-wrapper -->
-                    <div class="button-wrapper" v-for="item of hot" :key="item.id">
+                    <div class="button-wrapper" v-for="item of hot" :key="item.id" @click="handleCityClick(item.name)">
                         <div class="button">
                             {{item.name}}
                         </div>
@@ -25,16 +26,31 @@
             </div>
             <div class="area" v-for="(item, key) of cities" :key="key" :ref="key">
                 <div class="title border-topbottom">{{key}}</div>
-                <div class="item-list">
-                    <div class="item border-bottom" v-for="innerItem of item" :key="innerItem.id">{{innerItem.name}}</div>
+                <div class="item-list"> 
+                    <div class="item border-bottom" v-for="innerItem of item" :key="innerItem.id" @click="handleCityClick(innerItem.name)">{{innerItem.name}}</div>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+import { mapState, mapMutations } from 'vuex'
 import Bscroll from 'better-scroll'
 export default {
+    methods:{
+        handleCityClick(city){
+            // 我需要调用dispatch将数据传给actions，然后actions通过commit调用mutations，完成state中数据的改变
+            // this.$store.dispatch('changeCity' , city);
+            // this.$store.commit('changeCity' , city);
+            
+            // 因为 -> ...mapMutations(['changeCity']),所以这里直接用changeCity就可以
+            this.changeCity(city);
+            // 跳转到路由为 / 的页面
+            this.$router.push('/');
+        },
+        //意思为我的mutations叫做changeCity，然后我映射到我这个组件一个叫changeCity的方法里
+        ...mapMutations(['changeCity'])
+    },
     props:{
         cities:Object,
         hot:Array,
@@ -58,6 +74,12 @@ export default {
                 // console.log(element);
             }
         }
+    },
+    computed:{
+        ...mapState({
+            // 把vuex中公用的数据city映射到我这个组件的计算属性里，映射过来的名字叫做currentCity
+            currentCity: 'city'
+        })
     }
 }
 </script>

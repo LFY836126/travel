@@ -105,3 +105,122 @@ if(!this.keyword){
     return;
 }
 ```
+
+## 利用vuex，城市切换
+1. 安装vuex， 在main.js中引入`vuex import  store from './store/index.js'`, 在vue实例中挂载，这样每个子组件都可以使用vuex中的数据
+2. 当点击城市的时候，改变this.$store.state.city
+```
+（1）先点击城市，触发handleCityClick(item.name)事件，将城市名传进去
+（2）
+handleCityClick(city){
+    // 我需要调用dispatch将数据传给actions，然后actions通过commit调用mutations，完成state中数据的改变
+    this.$store.dispatch('changeCity' , city);
+}
+```
+3. 在index.js中：(导入vuex的文件)
+```
+actions:{
+    changeCity(ctx, city){
+        // 第一个参数：上下文ctx，第二个参数我们传递过来的对象
+        // action通过commit调用mutations
+        ctx.commit('changeCity', city);
+    }
+},
+mutations:{
+    changeCity(state, city){
+        state.city= city;
+    }
+}
+```
+4. 优化
+```
+//在handleCityClick(city)方法中，直接调用commit
+
+handleCityClick(city){
+    this.$store.commit('changeCity' , city);
+}
+
+index.js中直接写mutations，不用actions：
+mutations:{
+    changeCity(state, city){
+        state.city= city;
+    }
+}
+```
+
+## 利用路由跳转页面
+1. router-link to
+2. this.$router.push('/');  // 跳转到路由为 / 的页面
+
+## 刷新后依然是之前更改的城市
+1. 利用localStorage
+2. 考虑兼容
+```
+let defaultCity = '上海'
+try{
+    if(localStorage.city){
+        defaultCity = localStorage.city
+    }
+}catch(e){}
+
+state 部分：
+state:{
+    city:defaultCity
+},
+
+mutations部分:
+changeCity(state, city){
+    state.city= city;
+        try{
+            localStorage.city = city;
+        }catch(e){
+    }
+}
+```
+
+## mapState, mapMutations
+1. 导入：`import { mapState, mapMutations } from 'vuex'`
+2. 使用：
+```
+methods:{
+    ...mapMutations(['changeCity'])
+}
+调用：
+// 因为 -> ...mapMutations(['changeCity']),所以这里直接用changeCity就可以
+this.changeCity(city);
+```
+```
+computed:{
+    ...mapState(['city'])
+}
+
+调用： 
+<!-- 因为使用了mapState -->
+{{this.city}}
+```
+
+## getters
+1. 使用：
+```
+// 当我们需要根据state中的数据计算出新的数据的时候，我们就可以借助getters，可以避免数据的冗余
+index.js(vuex文件)
+    getters:{
+        doubleCity(state){
+            return state.city + ' ' + state.city
+        }
+    }
+使用vuex中数据的文件，这里是Header.vue
+    computed:{
+        ...mapState(['city']),
+        ...mapGetters(['doubleCity'])
+    }
+使用：
+    {{this.doubleCity}}
+```
+2. 总结
+    + 经过对比，发现 getters 中的方法， 和组件中的过滤器比较类似，因为 过滤器和 getters 都没有修改原数据， 都是把原数据做了一层包装，提供给了 调用者；
+    + 其次， getters 也和 computed 比较像， 只要 state 中的数据发生变化了，那么，如果 getters 正好也引用了这个数据，那么 就会立即触发 getters 的重新求值；
+
+## modules
+1. 网址：https://vuex.vuejs.org/guide/modules.html
+2. 优点：可以提高项目的可维护性

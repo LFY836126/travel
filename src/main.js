@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import router from './router/index.js'
 import App from './App.vue'
+import  store from './store/index.js'
 // 这三行引入轮播图插件
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
@@ -19,6 +20,7 @@ import './assets/styles/iconfont.css'
 fastClick.attach(document.body)
 var vm = new Vue({
 	el:'#app',
+	store,
 	render: c => c(App),
 	router,
 })

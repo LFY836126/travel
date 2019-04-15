@@ -9,17 +9,24 @@
         </div>
         <router-link to="/city">
         <div class="header-right">
-            {{city}}
+            <!-- {{this.$store.state.city}} -->
+
+            <!-- 因为使用了mapState -->
+            <!-- {{this.city}} -->
+            {{this.doubleCity}}
             <span class="iconfont arrow-icon">&#xe64a;</span>
         </div>
         </router-link>
     </div>
 </template>
 <script>
+import { mapState, mapGetters } from 'vuex'
 export default{
-    // 接受父组件传递过来的值
-    props:{
-        city:String
+    // 将vuex里面的数据映射到我的组件computed里，也就是vuex中的数据city，在我的计算属性里也有个一样的
+    //mapState里面参数可以是一个数组也可以是一个对象
+    computed:{
+        ...mapState(['city']),
+        ...mapGetters(['doubleCity'])
     }
 }
 </script>
@@ -40,7 +47,7 @@ export default{
         .header-input
             margin-top:.12rem
             margin-left:.4rem
-            margin-right:.6rem
+            margin-right:.2rem
             color:#ccc
             background:#fff
             border-radius:.1rem
@@ -51,8 +58,9 @@ export default{
         .header-right
             color:#fff
             float:right
-            width:1.2rem
-            font-size:.24rem
+            min-width:1.04rem
+            padding:0 .1rem
+            font-size:.27rem
             .arrow-icon
                 margin-left:-.04rem
                 font-size:.24rem

@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 父子组件之间的传递 -->
-        <homeHeader :city="city"></homeHeader>
+        <homeHeader></homeHeader>
         <homeSwiper :list="swiperList"></homeSwiper>
         <homeIcons :list="iconList"></homeIcons>
         <homeRecommend :list="recommendList"></homeRecommend>
@@ -25,7 +25,7 @@ export default{
     },
     data (){
         return {
-            city:'',
+            // city:'',
             swiperList:[],
             iconList:[],
             recommendList:[],
