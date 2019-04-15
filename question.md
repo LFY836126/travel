@@ -315,7 +315,7 @@ swiperOptions: {
 ```
 4. 网址： ` https://3.swiper.com.cn/api/index.html`
 
-##画廊轮播图问题
+## 画廊轮播图问题
 1. 描述：画廊部分的轮播图出现卡顿，并且滑动有问题
 2. 原因：最初gallary画廊组件处于隐藏的状态，如果再次把它显示出来的时候，swiper计算宽度可能会有些问题，导致轮播图无法正常滚动
 3. 解决：` observer:true  observeParents:true,`
