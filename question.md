@@ -70,3 +70,38 @@ proxyTable: {
 ```
 ## watch和computed区别
 1. 自己理解就是watch是监听一个在vue已经存在的数据，computed是监听一个{{data}}中的数据
+
+## 字母表部分的性能优化
+1. Alphabet.vue是由City.vue这个文件中的city中的数据渲染的 ，当City.vue  ajax获取数据之后，city{}的值发生变化，Alphabet.vue才会被渲染出来，当向Alphabet.vue传的数据发生变化的时候，Alphabet.vue就会重新渲染，然后updated这个生命周期钩子函数就会被执行
+```
+// 将startY放在这里避免每次都需要重复计算
+updatad(){
+    this.startY = this.$refs['A'][0].offsetTop;
+},
+```
+2. 函数节流：当鼠标在字母表上来回移动的时候，这时的touchmove执行频率是非常高的，通过节流限制函数执行频率,提高网页性能
+```
+//如果正在做这件事情，就让它延迟16毫秒之后再去执行，如果在16毫秒之间，又去做收治的滚动，那么它会将上次的操作清除掉，重新执行这次的操作
+if(this.timer){
+    clearTimeout(this.timer);
+}
+this.timer = setTimeout(() => {
+    const touchY = e.touches[0].clientY - 79//79是绿色背景所占宽度
+    const index = Math.floor((touchY- this.startY)/20)   //20是指每个字母的高度
+    // console.log(index);
+    if(index >= 0 && index <= this.letters.length){
+        // 传递给父组件进而传递给List组件，实现当拖动时，城市随着字母显示
+        this.$emit('change' , this.letters[index])
+    }
+}, 16)
+```
+
+## return
+```
+// 如果输入查找字母之后，删除了,让下方显示恢复正常
+//这里的return充当什么角色？不加就不好使
+if(!this.keyword){
+    this.list = [];
+    return;
+}
+```

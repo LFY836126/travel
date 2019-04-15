@@ -1,7 +1,7 @@
 <template>
     <div>
         <cityHeader></cityHeader>
-        <citySearch></citySearch>
+        <citySearch :cities="cities"></citySearch>
         <cityList :cities="cities" :letter="letter" :hot="hotCities"></cityList>
         <!--@change="handleLetterChange"： 父组件接受子组件传递过来的值 -->
         <cityAlphabet :cities="cities" @change="handleLetterChange"></cityAlphabet>
