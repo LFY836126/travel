@@ -224,3 +224,42 @@ index.js(vuex文件)
 ## modules
 1. 网址：https://vuex.vuejs.org/guide/modules.html
 2. 优点：可以提高项目的可维护性
+
+## keep-alive
+```
+（1）
+keep-alive->vue自带的，意思为：当我的路由内容被加载过一次之后，我就把路由中的内容放到内存之中，下一次再进这个路由的时候，不需要重新渲染这个组件，只需要到内存中把以前的内容拿出来显示到 页面上就可以了
+（2）
+注意：当使用keepalive的时候，组件中会多出一个生命周期函数叫做activated
+
+App.vue:
+<template>
+	<div>
+		<keep-alive>
+			<router-view></router-view>
+		</keep-alive>
+	</div>
+</template>
+<script>
+export default{
+	name:'App'
+}
+</script>
+```
+
+## 在使用keepalive的情况下，切换城市发送带城市这个参数的ajax请求
+1. 使用activated：当页面重新显示的时候触发这个方法，可以判断当前页面显示的城市和上一个页面显示的城市不同时再发一个ajax请求
+```
+（1）先用一个变量将此次城市保存起来
+mounted (){
+    // 当页面挂载好了再执行
+    this.lastCity = city
+},
+（2）当页面重新显示的时候，判断上次城市和这次城市是否一样，一样不改变，不一样重新发一次ajax请求
+activated(){
+    if(this.lastCity !=this.city){
+        this.lastCity = city
+        this.getHomeInfo();
+    }
+},
+```

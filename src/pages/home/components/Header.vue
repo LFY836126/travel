@@ -12,8 +12,10 @@
             <!-- {{this.$store.state.city}} -->
 
             <!-- 因为使用了mapState -->
-            <!-- {{this.city}} -->
-            {{this.doubleCity}}
+            {{this.city}}
+
+            <!-- 对于getters的测试 -->
+            <!-- {{this.doubleCity}} -->
             <span class="iconfont arrow-icon">&#xe64a;</span>
         </div>
         </router-link>
@@ -26,7 +28,7 @@ export default{
     //mapState里面参数可以是一个数组也可以是一个对象
     computed:{
         ...mapState(['city']),
-        ...mapGetters(['doubleCity'])
+        // ...mapGetters(['doubleCity'])
     }
 }
 </script>
