@@ -38,6 +38,7 @@ module.exports = {
       '@': resolve('src'),
       // 2. 拼接路径: 之后再引用src/assets/styles里面的文件就直接可以利用~styles代替
       'styles': resolve('src/assets/styles'),
+      'common': resolve('src/common'),
     }
   },
   module: {

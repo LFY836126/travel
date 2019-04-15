@@ -250,7 +250,7 @@ export default{
 ## 在使用keepalive的情况下，切换城市发送带城市这个参数的ajax请求
 1. 使用activated：当页面重新显示的时候触发这个方法，可以判断当前页面显示的城市和上一个页面显示的城市不同时再发一个ajax请求
 ```
-（1）先用一个变量将此次城市保存起来
+（1）先用一个变量将上次城市保存起来
 mounted (){
     // 当页面挂载好了再执行
     this.lastCity = city
@@ -262,4 +262,72 @@ activated(){
         this.getHomeInfo();
     }
 },
+```
+## 防止图片抖动
+```
+// 它的高度相对于它的宽度会自动撑开31.25%，这样就保存了图片的比例，一下这四行就是设置了图片保留原比例，而且防抖动（当图片未加载，下面内容先加载占据图片原本位置，当图片加载完恢复正常布局）
+overflow:hidden
+width:100%
+height:0
+padding-bottom:30.4%
+```
+
+## Swiper的使用
+1. 导入
+```
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
+```
+2. 
+```
+应用：
+<swiper :options="swiperOption">
+    <swiper-slide>
+        <img class="swiper-img" :src="#">
+    </swiper-slide>
+    <div class="swiper-pagination"  slot="pagination"></div>
+</swiper>
+```
+3. js：
+```
+（1）轮播图下面默认是圈圈
+data (){
+        return{
+            swiperOption:{
+                // 实现轮播图下面的圈圈
+                pagination:{
+                    el : '.swiper-pagination'
+                },
+                // 让轮播图支持循环轮播，就是第一页往前还能翻
+                loop:true
+            }
+        },
+    },
+
+（2）让轮播图下面为分页显示像 ' 1/24'一样
+swiperOptions: {
+    pagination: {
+        el : '.swiper-pagination',
+        type : 'fraction'
+    }
+    // paginationType: 'fraction',
+}
+```
+4. 网址： ` https://3.swiper.com.cn/api/index.html`
+
+##画廊轮播图问题
+1. 描述：画廊部分的轮播图出现卡顿，并且滑动有问题
+2. 原因：最初gallary画廊组件处于隐藏的状态，如果再次把它显示出来的时候，swiper计算宽度可能会有些问题，导致轮播图无法正常滚动
+3. 解决：` observer:true  observeParents:true,`
+```
+swiperOptions: {
+    pagination: {
+        el : '.swiper-pagination',
+        type : 'fraction'
+    },
+    // 当swiper插件只要监听我这个元素或者父级元素DOM结构的改变，会自动的自我刷新一次，通过刷新就能解决swiper计算宽度的问题
+    observer:true,
+    observeParents:true,
+    // paginationType: 'fraction',
+}
 ```
