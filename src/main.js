@@ -5,6 +5,7 @@ import App from './App.vue'
 import  store from './store/index.js'
 // 这三行引入轮播图插件
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'babel-polyfill'
 import 'swiper/dist/css/swiper.css'
 Vue.use(VueAwesomeSwiper)
 

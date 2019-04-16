@@ -12,11 +12,14 @@
         </div>
         <!-- :imgs：  传递给子组件的值 -->
         <!-- @close:   接受子组件传递的值-->
-        <commonGallary v-show="showGallary" :imgs="bannerImgs" @close="handleGallaryClose"></commonGallary>
+        <fadeAnimation>
+            <commonGallary v-show="showGallary" :imgs="bannerImgs" @close="handleGallaryClose"></commonGallary>
+        </fadeAnimation>
     </div>
 </template>
 <script>
 import commonGallary from 'common/gallary/Gallary.vue'
+import fadeAnimation from 'common/fade/FadeAnimation.vue'
 export default {
     props:{
         sightName: String,
@@ -30,6 +33,7 @@ export default {
     },
     components:{
         commonGallary,
+        fadeAnimation,
     },
     methods:{
         handleBannerClick(){

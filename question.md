@@ -414,3 +414,62 @@ scrollBehavior(to , from , savedPosition){
 }
 //这里就是我让页面切换的时候，始终回到最顶部
 ```
+
+## config下的index.js下的proxyTable
+```
+在开发环境下，如果访问api这个路径，它会帮助你把这个路径的请求打到http://localhost:8080这个端口下(这个端口是前端服务器的一个端口)
+
+proxyTable: {
+    // 当请求是以api开头的那么进行以下操作
+    '/api':{
+        // 链接替换为target中的内容
+        target:'http://localhost:8080',
+        pathRewrite:{
+        // 以api开头的替换为/static/mock
+        '^/api': '/static/mock'
+        }
+    }
+},
+```
+
+## Vue项目接口的联调(前后端整和，调试)
+1. 改变proxyTable中target指向的地址
+```
+//当访问api的时候，我就转发到http://localhost:80这个端口下，也就是我的PHP服务器之上
+ proxyTable: {
+    '/api':{
+        //这个地址可以写内网的ip地址或者外网的域名都是没问题的
+        target:'http://localhost',
+    }
+},
+```
+## 其他
+1. 
+```
+问题描述：
+   当访问localhost:8080时，项目可以正常显示，但是当输入我本机IP地址加上8080就会被拒绝，但是IP地址加80就可以正常启动php服务器
+
+原因：
+   前端的项目是通过webpack-dev-server启动的，webpack默认不支持通过IP的形式进行页面的访问
+解决：
+更改package.json文件中的dev值，-->加上一个--host 0.0.0.0,如下：
+"dev": "webpack-dev-server --host 0.0.0.0 --inline --progress --config build/webpack.dev.conf.js"`
+
+然后再访问http://10.51.26.2:8080/#/(本机地址为：10.51.26.2)
+```
+
+## 滚动字母表，页面随着动
+1. 解决：给事件添加阻止默认，这样问题就解决了
+```
+@touchstart.prevent
+```
+
+## 手机端使用白屏的的问题
+1. 下载babel-polyfill : npm i babel-polyfill -D
+2. 引入:import 'babel-polyfill'
+
+## 后续学习
+1. vue-router：`https://router.vuejs.org/zh/`
+2. vuex: `https://router.vuejs.org/zh/`
+3. 服务器端渲染: `https://ssr.vuejs.org/zh/`
+4. vue插件: `https://github.com/vuejs/awesome-vue`
