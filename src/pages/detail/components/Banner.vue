@@ -67,7 +67,7 @@ export default {
                 height:.32rem
                 border-radius:.2rem
                 background:rgb(0, 0, 0, .8)
-                font-size:.24rem
+                font-size:.3rem
                 .banner-icon
-                    font-size:.24rem
+                    font-size:.3rem
 </style>

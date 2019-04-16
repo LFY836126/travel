@@ -331,3 +331,23 @@ swiperOptions: {
     // paginationType: 'fraction',
 }
 ```
+
+## 景点详情中顶部渐隐渐显
+1. 在元素身上绑定样式
+```
+<div class="header-fixed" v-show="!showAbs" :style="opacityStyle">
+```
+2. 初始透明度为0
+```
+opacityStyle : {
+    opacity:0
+}
+```
+3. 让颜色随滚动条滚动距离改变
+```
+let opacity = top / 140
+    opacity = opacity > 1? 1 : opacity
+    this.opacityStyle = {
+        opacity,
+}
+```
