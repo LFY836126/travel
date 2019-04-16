@@ -263,7 +263,13 @@ activated(){
     }
 },
 ```
-2. 补充一个生命周期函数deactivated:它是页面即将被隐藏，或者页面即将被替换为新的页面的时候执行的
+2. 通过在keep-alive中设置exclude="Detail",意思为除了Detail之外其他的页面都可以被缓存，这里的Detail是Detail.vue中属性name的值，也就是Detail.vue组件的名字
+```
+<keep-alive exclude="Detail">
+    <router-view></router-view>
+</keep-alive>
+```
+3. 补充一个生命周期函数deactivated:它是页面即将被隐藏，或者页面即将被替换为新的页面的时候执行的
 
 ## 防止图片抖动
 ```
@@ -374,7 +380,7 @@ deactivated(){
 ```
 export default {
     // 这个名字很大的一个用处就是我们使用递归组件来使用
-    name:'DetailList',
+    name:'detailList',
     props:{
         list:Array,
     }
@@ -386,4 +392,25 @@ export default {
 <div v-if="item.children">
     <detailList :list="item.children"></detailList>
 </div>
+```
+
+## name属性的作用
+1. 递归组件，标签就是名字
+```
+name:'detailList',
+
+<detailList :list="item.children"></detailList>
+```
+2. keep-alive设置不被缓存的组件，利用组件的名字
+3. 在vue开发工具中，一个个组件的名字，就是在name中的值
+
+## 组件之间相互影响
+1. 描述：当首页故宫栏被拖到下面了，详情页也会到下面了
+2. 解决：在route下的index.js文件中配置如下
+```
+// 每次进行路由切换的时候，我都先进入显示的页面x轴初始位置为0， y初始位置也为0
+scrollBehavior(to , from , savedPosition){
+    return{x : 0, y : 0};
+}
+//这里就是我让页面切换的时候，始终回到最顶部
 ```

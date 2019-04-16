@@ -13,9 +13,9 @@
     </div>
 </template>
 <script>
-export default {
+export defaul   t {
     // 这个名字很大的一个用处就是我们使用递归组件来使用
-    name:'DetailList',
+    name:'detailList',
     props:{
         list:Array,
     }

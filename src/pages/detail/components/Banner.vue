@@ -1,27 +1,31 @@
 <template>
     <div>
         <div class="banner" @click="handleBannerClick">
-            <img src="//img1.qunarzz.com/sight/p0/1409/19/adca619faaab0898245dc4ec482b5722.jpg_600x330_f922b488.jpg" class="banner-img">
+            <img :src="bannerImg" class="banner-img">
             <div class="banner-info">
-                <div class="banner-title">故宫</div>
+                <div class="banner-title">{{this.sightName}}</div>
                 <div class="banner-number">
                     <span class="iconfont banner-icon">&#xe692;</span>
-                    39
+                    {{this.bannerImgs.length}}
                 </div>
             </div>
         </div>
         <!-- :imgs：  传递给子组件的值 -->
         <!-- @close:   接受子组件传递的值-->
-        <commonGallary v-show="showGallary" :imgs="imgs" @close="handleGallaryClose"></commonGallary>
+        <commonGallary v-show="showGallary" :imgs="bannerImgs" @close="handleGallaryClose"></commonGallary>
     </div>
 </template>
 <script>
 import commonGallary from 'common/gallary/Gallary.vue'
 export default {
+    props:{
+        sightName: String,
+        bannerImg: String,
+        bannerImgs: Array
+    },
     data(){
         return {
             showGallary:false,
-            imgs:['//img1.qunarzz.com/sight/p0/1409/19/adca619faaab0898245dc4ec482b5722.jpg_600x330_f922b488.jpg', '//img1.qunarzz.com/sight/p0/1708/2b/2b3b94de99c0a425a3.img.jpg_600x330_b40971b4.jpg'],
         }
     },
     components:{
