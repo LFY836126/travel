@@ -368,3 +368,22 @@ deactivated(){
     window.removeEventListener('scroll' , this.handleScroll)
 },
 ```
+
+## 递归组件
+1. name的作用：这个名字很大的一个用处就是我们使用递归组件来使用
+```
+export default {
+    // 这个名字很大的一个用处就是我们使用递归组件来使用
+    name:'DetailList',
+    props:{
+        list:Array,
+    }
+}
+```
+2. 使用
+```
+<!-- 如果自己下面有子组件的话，就把子组件传进去，递归循环显示所有子组件 -->
+<div v-if="item.children">
+    <detailList :list="item.children"></detailList>
+</div>
+```

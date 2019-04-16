@@ -32,7 +32,6 @@ export default {
     },
     methods:{
         handleScroll(){
-            console.log('aaa');
             // 滚动距离：document.documentElement.scrollTop
             // console.log(document.documentElement.scrollTop);
             const top = document.documentElement.scrollTop
