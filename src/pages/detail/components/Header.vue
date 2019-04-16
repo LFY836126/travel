@@ -67,7 +67,7 @@ export default {
             fonr-size:.4rem
     .header-fixed
         // z-index应该大于List.vue(票分类那个部分)小于Gallary.vue(画廊部分)
-        z-index:99
+        z-index:2
         position: fixed
         top:0
         left:0
