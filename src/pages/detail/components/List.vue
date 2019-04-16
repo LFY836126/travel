@@ -13,7 +13,7 @@
     </div>
 </template>
 <script>
-export defaul   t {
+export default {
     // 这个名字很大的一个用处就是我们使用递归组件来使用
     name:'detailList',
     props:{
