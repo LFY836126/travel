@@ -473,3 +473,6 @@ proxyTable: {
 2. vuex: `https://router.vuejs.org/zh/`
 3. 服务器端渲染: `https://ssr.vuejs.org/zh/`
 4. vue插件: `https://github.com/vuejs/awesome-vue`
+
+## copy
+1. 整个项目仿自`http://touch.piao.qunar.com/`
