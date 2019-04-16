@@ -22,10 +22,17 @@ export default {
         }
     },
     activated(){
+        // 页面展示时候绑定scroll事件
         window.addEventListener('scroll' , this.handleScroll)
+        // console.log('aaa');
+    },
+    deactivated(){
+        // 页面隐藏的时候解绑scroll事件
+        window.removeEventListener('scroll' , this.handleScroll)
     },
     methods:{
         handleScroll(){
+            console.log('aaa');
             // 滚动距离：document.documentElement.scrollTop
             // console.log(document.documentElement.scrollTop);
             const top = document.documentElement.scrollTop

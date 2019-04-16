@@ -263,6 +263,8 @@ activated(){
     }
 },
 ```
+2. 补充一个生命周期函数deactivated:它是页面即将被隐藏，或者页面即将被替换为新的页面的时候执行的
+
 ## 防止图片抖动
 ```
 // 它的高度相对于它的宽度会自动撑开31.25%，这样就保存了图片的比例，一下这四行就是设置了图片保留原比例，而且防抖动（当图片未加载，下面内容先加载占据图片原本位置，当图片加载完恢复正常布局）
@@ -350,4 +352,19 @@ let opacity = top / 140
     this.opacityStyle = {
         opacity,
 }
+```
+
+## 全局事件的使用：圈重点
+1. 在对scroll事件进行监听的时候，使用了
+`window.addEventListener('scroll' ,this.handleScroll)`，但是这个事件会对全局都有影响，所以我们要适时的解绑
+2. 解绑，因为我只需要在我Header.vue当前页进行操作，所以解绑事件我放在了deactivated
+```
+activated(){
+    // 页面展示时候绑定scroll事件
+    window.addEventListener('scroll' , this.handleScroll)
+},
+deactivated(){
+    // 页面隐藏的时候解绑scroll事件
+    window.removeEventListener('scroll' , this.handleScroll)
+},
 ```
