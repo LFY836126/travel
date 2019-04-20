@@ -6,7 +6,7 @@
 3. CSS的预处理框架：stylu
 
 ## 项目主要效果展示
-<img width="700" src="./imgs/result.png"/>
+<img width="700" src="./imgs/res.png"/>
 <!-- <figure class="third">
 <img width="150" src="./imgs/first.png"/><img width="150" src="./imgs/city.png"/><img width="150" src="./imgs/details.png"/>
 </figure> -->
