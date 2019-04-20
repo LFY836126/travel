@@ -1,3 +1,74 @@
+## 手机显示配适
+1. 阻止用户手滑放大或缩小页面，需要在public/index.html中添加修改meta元素。
+2. 解决：
+```
+//HTML
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+```
+
+## CSS样式统一问题
+1. 我们需要重置页面样式，因为在不同的手机浏览器上，默认的css样式不是统一的。
+2. 解决：使用reset.css重置所有元素的默认样式
+
+## 一像素边框问题
+1. 有的手机分辨率比较高，是2倍屏或3倍屏，手机上的浏览器就会把CSS中的1像素值展示为2个或3个物理宽度
+2. 解决： 添加一个border.css库，将利用scroll缩放的原理将边框重置。当我们需要使用一像素边框时只需要在标签上添加对应类名，如设置底部一像素边框就在标签上加入"border-bottom"的class名
+
+##300毫秒点击延迟问题
+1. 在移动端开发中，某些机型上使用click事件会延迟300ms才执行，这样影响了用户体验。
+2. 解决方法： 引入fastclick.js库
+```
+（1）安装fastclick
+    npm install fastclick --save
+
+（2）在项目中（src/main.js）使用：
+    import fastClick from 'fastclick' 
+    fastClick.attach(document.body)
+```
+
+## 配置并使用stylus
+1. 在 src/assets 文件夹下创建styles文件夹。用于公用样式的存放。比如背景色就是一个各个页面都会用到的一个统一的css参数，我们可以在src/assets/styles/varibles.styl中定义 $bgcolor = #00bcd4 ，而后在样式里引入这个styl文件即可
+```
+//style中的引用
+    @import '../../../assets/styles/varibles.styl';
+    background-color $bgcolor
+//问题：@import文件引入的前缀非常长
+//解决：配置别名alias解决此问题
+```
+
+## 配置别名
+1. 在webpack.base.conf文件中配置
+```
+// （1） 拼接路径需要的配置
+const createLintingRule = () => ({
+  test: /\.(js|vue)$/,
+  loader: 'eslint-loader',
+  enforce: 'pre',
+  include: [resolve('src'), resolve('test')],
+  options: {
+    formatter: require('eslint-friendly-formatter'),
+    emitWarning: !config.dev.showEslintErrorsInOverlay
+  }
+})
+module.exports = {
+    resolve: {
+        extensions: ['.js', '.vue', '.json'],
+        alias: {
+        'vue$': 'vue/dist/vue.esm.js',
+        '@': resolve('src'),
+// （2）拼接路径: 之后再引用src/assets/styles里面的文件就直接可以利用~styles代替
+        'styles': resolve('src/assets/styles'),
+        'common': resolve('src/common'),
+        }
+    },
+}
+```
+2. 配置完别名后使用：
+```
+//例如在style中引用文件：
+    @import '~styles/varibles.styl'
+```
+
 ## 轮播图问题
 1. 每次刷新页面，总是默认显示最后一张图片
     + 原因：因为每当加载页面时，home.vue都会发送ajax请求，当ajax没有请求回数据的时候swiper.vue中的list是一个空数组，所以会出现这样的问题
