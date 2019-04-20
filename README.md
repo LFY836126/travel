@@ -5,16 +5,8 @@
 2. 插件：vue-awesome-swiper、better-scroll、axios、fastclick
 3. CSS的预处理框架：stylu
 
-## 项目效果展示
-
-### 首页
-<img height="400" src="./imgs/first.png"/>
-
-### 城市选择页面
-<img height="400" src="./imgs/city.png"/>
-
-### 详情页面
-<img height="400" src="./imgs/details.png"/>
+## 项目主要效果展示
+<img width="650" src="./imgs/result.png"/>
 
 ## 项目开发流程
 
