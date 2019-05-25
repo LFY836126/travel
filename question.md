@@ -1,4 +1,3 @@
-
 ## 手机显示配适
 1. 阻止用户手滑放大或缩小页面，需要在public/index.html中添加修改meta元素。
 2. 解决：
@@ -255,6 +254,7 @@ changeCity(state, city){
 2. 使用：
 ```
 methods:{
+    //意思为我的mutations叫做changeCity，然后我映射到我这个组件一个叫changeCity的方法里
     ...mapMutations(['changeCity'])
 }
 调用：
@@ -263,12 +263,15 @@ this.changeCity(city);
 ```
 ```
 computed:{
-    ...mapState(['city'])
+    ...mapState({
+        // 把vuex中公用的数据city映射到我这个组件的计算属性里，映射过来的名字叫做currentCity
+        currentCity: 'city'
+    })
 }
 
 调用： 
 <!-- 因为使用了mapState -->
-{{this.city}}
+{{this.currentCity}}
 ```
 
 ## getters
@@ -294,7 +297,7 @@ index.js(vuex文件)
     + 其次， getters 也和 computed 比较像， 只要 state 中的数据发生变化了，那么，如果 getters 正好也引用了这个数据，那么 就会立即触发 getters 的重新求值；
 
 ## modules
-1. 网址：https://vuex.vuejs.org/guide/modules.html
+1. 网址：https://vuex.vuejs.org/guide/modules.html/https://vuex.vuejs.org/zh/guide/modules.html
 2. 优点：可以提高项目的可维护性
 
 ## keep-alive

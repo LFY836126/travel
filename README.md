@@ -1,9 +1,11 @@
 # Vue开发去哪儿核心页面
 
-## 项目涉及到技术栈：
-1. Vue、Vue-router、Vuex、Vue-cli
-2. 插件：vue-awesome-swiper、better-scroll、axios、fastclick
-3. CSS的预处理框架：stylu
+## 项目技术栈：Vue-cli脚手架配合Vue、Vue-router、Vuex
+1. 通过Html+CSS对页面进行搭建，利用sass预编译语言进行布局
+2. 使用JavaScript等技术，实现产品所需的交互效果；
+3. Vue-axios结合mock数据进行渲染，利用Vuex实现数据共享，使用localStorage持久存储数据
+4. 兄弟组件实现城市选择页面，递归组件实现详情列表
+5. 使用Vue路由实现页面内容的切换，利用keep-alive优化路由页面性能
 
 ## 项目主要效果展示
 <img width="800" src="./imgs/res.png"/>

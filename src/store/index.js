@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import state from './state.js'
 import mutations from './mutations.js'
 Vue.use(Vuex);
-// 在这里定义完再在main.js中引入vuex:import  store from './store/index.js'，在vue实例中挂载，这样每个子组件都可以使用vuex中的数据
+// 在这里定义完再在main.js中引入(vuex:import  store from './store/index.js')，在vue实例中挂载，这样每个子组件都可以使用vuex中的数据
 export default new Vuex.Store({
     state,
     // actions:{
